@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>个人博客</title>
+  </head>
+  <body>
+    <h4>web特效整理</h4>
+
+    <a href="./examples/3D视差hover效果.html"></a>
+    <a href="./examples/canvas签名.html"></a>
+    <script>
+      const nodes = document.querySelectorAll("a");
+      for (let n of nodes) {
+        n.innerHTML = decodeURI(n.pathname.replace(/.html|\/examples\//g, ""));
+        console.log();
+      }
+    </script>
+  </body>
+</html>
