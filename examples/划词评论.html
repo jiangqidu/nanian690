@@ -9,13 +9,21 @@
       #book {
         width: 980px;
         height: 560px;
-        margin: 60px auto;
+        margin: 60px auto 0 auto;
         padding: 0 60px 20px 60px;
         border: 1px solid #999;
         position: relative;
       }
+      #clear {
+        width: 1100px;
+        margin: 10px auto;
+      }
       #book h2 {
         text-align: center;
+      }
+      #book button {
+        display: none;
+        position: absolute;
       }
       #canvas {
         left: 0;
@@ -27,7 +35,7 @@
   </head>
   <body>
     <div id="book">
-      <button>复制</button>
+      <button onclick="highlight()">文字高亮</button>
       <canvas id="canvas"></canvas>
       <h2>从百草园到三味书屋</h2>
       <p>
@@ -45,8 +53,13 @@
         这故事很使我觉得做人之险，夏夜乘凉，往往有些担心，不敢去看墙上，而且极想得到一盒老和尚那样的飞蜈蚣。走到百草园的草丛旁边时，也常常这样想。但直到现在，总还没有得到，但也没有遇见过赤练蛇和美女蛇。叫我名字的陌生声音自然是常有的，然而都不是美女蛇。
       </p>
     </div>
+    <div id="clear">
+      <button onclick="clearCanvas()">清空画布</button>
+    </div>
+
     <script>
       let rect = null;
+      const btn = document.querySelector("button");
       const canvas = document.getElementById("canvas");
       canvas.width = 1102; // 注意：没有单位
       canvas.height = 582;
@@ -55,9 +68,17 @@
       const container = document.querySelector("#book");
       // 鼠标放开事件
       container.addEventListener("mouseup", (event) => {
-        // 计算复制按钮位置
+        if (!document.getSelection().toString()) {
+          btn.style.display = "none";
+          return;
+        }
 
-        // ctx.clearRect(0, 0, container.offsetWidth, container.offsetHeight);
+        // 计算复制按钮位置
+        const top = event.pageY - container.offsetTop;
+        const left = event.pageX - container.offsetLeft + 20;
+        btn.style.display = "block";
+        btn.style.top = `${top}px`;
+        btn.style.left = `${left}px`;
         const {
           startContainer, // 起始节点
           startOffset, // 起始节点偏移量
@@ -70,15 +91,25 @@
         range.setStart(startContainer, startOffset);
         range.setEnd(endContainer, endOffset);
         // 通过 getBoundingClientRect 获取位置信息
-        rect = range.getBoundingClientRect();
-        // const { left, top, width, height } = rect;
-        // ctx.fillRect(
-        //   left - container.offsetLeft,
-        //   top - container.offsetTop,
-        //   width,
-        //   height
-        // );
+        rect = range.getClientRects();
       });
+      // 文字高亮
+      function highlight() {
+        btn.style.display = "none";
+        for (let t of rect) {
+          const { left, top, width, height } = t;
+          ctx.fillRect(
+            left - container.offsetLeft,
+            top - container.offsetTop,
+            width,
+            height
+          );
+        }
+      }
+      // 清空画布
+      function clearCanvas() {
+        ctx.clearRect(0, 0, container.offsetWidth, container.offsetHeight);
+      }
     </script>
   </body>
 </html>
