@@ -8,18 +8,21 @@
     <div id="app">
       <dl>
         <dt>web常用功能</dt>
-        <dd><a href="/examples/canvas签名.html"></a></dd>
-        <dd><a href="/examples/划词评论.html"></a></dd>
+        <dd><a href="/examples/js/canvas签名.html"></a></dd>
+        <dd><a href="/examples/js/划词评论.html"></a></dd>
+        <dd><a href="/examples/js/文章阅读进度条.html"></a></dd>
+        <dd><a href="/examples/css/直播间点赞效果.html"></a></dd>
       </dl>
       <dl>
         <dt>web特效</dt>
-        <dd><a href="/examples/3D视差hover效果.html"></a></dd>
+        <dd><a href="/examples/css/3D视差hover效果.html"></a></dd>
+        <dd><a href="/examples/css/纯CSS实现日地月的公转.html"></a></dd>
       </dl>
     </div>
     <script>
       const nodes = document.querySelectorAll("a");
       for (let n of nodes) {
-        n.innerHTML = decodeURI(n.pathname.replace(/.html|\/examples\//g, ""));
+        n.innerHTML = decodeURI(n.pathname.replace(/.html|[a-z&]|\//g, ""));
         console.log();
       }
     </script>
