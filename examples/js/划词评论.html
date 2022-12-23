@@ -8,9 +8,9 @@
     <style>
       #book {
         width: 980px;
-        height: 560px;
+        height: 430px;
         margin: 60px auto 0 auto;
-        padding: 0 60px 20px 60px;
+        padding: 0 60px;
         border: 1px solid #999;
         position: relative;
       }
@@ -48,13 +48,9 @@
       <p>
         长妈妈曾经讲给我一个故事听：先前，有一个读书人住在古庙里用功，晚间，在院子里纳凉的时候，突然听到有人在叫他。答应着，四面看时，却见一个美女的脸露在墙头上，向他一笑，隐去了。他很高兴；但竟给那走来夜谈的老和尚识破了机关。说他脸上有些妖气，一定遇见“美女蛇”了；这是人首蛇身的怪物，能唤人名，倘一答应，夜间便要来吃这人的肉的。他自然吓得要死，而那老和尚却道无妨，给他一个小盒子，说只要放在枕边，便可高枕而卧。他虽然照样办，却总是睡不着，——当然睡不着的。到半夜，果然来了，沙沙沙！门外象是风雨声。他正抖作一团时，却听得豁的一声，一道金光从枕边飞出，外面便什么声音也没有了，那金光也就飞回来，敛在盒子里。后来呢？后来，老和尚说，这是飞蜈蚣，它能吸蛇的脑髓，美女蛇就被它治死了。
       </p>
-      <p>结末的教训是：所以倘有陌生的声音叫你的名字，你万不可答应他。</p>
-      <p>
-        这故事很使我觉得做人之险，夏夜乘凉，往往有些担心，不敢去看墙上，而且极想得到一盒老和尚那样的飞蜈蚣。走到百草园的草丛旁边时，也常常这样想。但直到现在，总还没有得到，但也没有遇见过赤练蛇和美女蛇。叫我名字的陌生声音自然是常有的，然而都不是美女蛇。
-      </p>
     </div>
     <div id="clear">
-      <button onclick="clearCanvas()">清空画布</button>
+      <button onclick="clearCanvas()">清空选中文字</button>
     </div>
 
     <script>
@@ -62,7 +58,7 @@
       const btn = document.querySelector("button");
       const canvas = document.getElementById("canvas");
       canvas.width = 1102; // 注意：没有单位
-      canvas.height = 582;
+      canvas.height = 432;
       const ctx = canvas.getContext("2d");
       ctx.fillStyle = "rgba(255, 170, 0, 0.2)";
       const container = document.querySelector("#book");
