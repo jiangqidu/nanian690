@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>jQuery入口函数与js入口函数的对比</title>
+    <script type="text/javascript" src="../jquery-1.12.4.js"></script>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    #app {
+      display: flex;
+      align-items: center;
+    }
+    img {
+      margin-right: 20px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <img src="../images/1/51m.jpg" alt="" width="335" />
+      <div>
+        <p>
+          <span>js代码加载时间：</span><span style="margin-left: 3px"></span>
+        </p>
+        <p><span>jq代码加载时间：</span><span></span></p>
+      </div>
+    </div>
+
+    <script>
+      window.onload = function () {
+        const node = document
+          .getElementById("app")
+          .getElementsByTagName("div")[0]
+          .getElementsByTagName("p")[0]
+          .getElementsByTagName("span")[1];
+
+        node.innerText = Date.now();
+      };
+
+      $(document).ready(function () {
+        $("p").last().children().eq(1).text(Date.now());
+      });
+    </script>
+  </body>
+</html>

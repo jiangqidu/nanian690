@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>突出展示</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      body {
+        background: #000;
+      }
+
+      .wrap {
+        margin: 100px auto 0;
+        width: 630px;
+        height: 394px;
+        padding: 10px 0 0 10px;
+        background: #000;
+        overflow: hidden;
+        border: 1px solid #fff;
+      }
+
+      .wrap li {
+        float: left;
+        margin: 0 10px 10px 0;
+      }
+
+      .wrap img {
+        display: block;
+        border: 0;
+      }
+    </style>
+  </head>
+  <script src="../jquery-1.12.4.js"></script>
+  <script>
+    $(function () {
+      $(".wrap>ul>li").mouseenter(function () {
+        $(this).css("opacity", "1").siblings().css("opacity", "0.4");
+      });
+
+      $(".wrap").mouseleave(function () {
+        //多种查找元素方法
+        //$("li");
+        //$(".wrap li");
+        //$(".wrap>ul>li")
+        //$(this).children().children("li");
+        $(this).find("li").css("opacity", 1);
+      });
+    });
+  </script>
+  <body>
+    <div class="wrap">
+      <ul>
+        <li>
+          <a href="#"><img src="../images/3/01.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="../images/3/02.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="../images/3/03.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="../images/3/04.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="../images/3/05.jpg" alt="" /></a>
+        </li>
+        <li>
+          <a href="#"><img src="../images/3/06.jpg" alt="" /></a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
