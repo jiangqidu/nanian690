@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>韩雪冬轮播图</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      li {
+        list-style: none;
+      }
+      img {
+        border: none;
+      }
+      body {
+        background: #ececec;
+        padding-top: 50px;
+      }
+
+      #automatic {
+        width: 970px;
+        height: 344px;
+        position: relative;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+
+      .prev_div {
+        width: 130px;
+        height: 72px;
+        position: absolute;
+        top: 128px;
+        left: 92px;
+        z-index: 5;
+        background: red;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        cursor: pointer;
+      }
+      .next_div {
+        width: 130px;
+        height: 72px;
+        position: absolute;
+        top: 128px;
+        right: 92px;
+        z-index: 5;
+        background: red;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      #automatic .prev {
+        width: 120px;
+        height: 72px;
+        position: absolute;
+        top: 108px;
+        left: 72px;
+        z-index: 4;
+      }
+      #automatic .prev .ico {
+        width: 76px;
+        height: 112px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: url(../../images/banner/hanxuedong/prev.png);
+      }
+      #automatic .prev .ico1 {
+        width: 76px;
+        height: 112px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: url(../../images/banner/hanxuedong/prev_1.png);
+        z-index: 2;
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+      #automatic .prev .txt {
+        width: 106px;
+        height: 112px;
+        position: absolute;
+        top: 0;
+        left: 65px;
+        background: url(../../images/banner/hanxuedong/prev_txt.png) no-repeat;
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+
+      #automatic .next {
+        width: 120px;
+        height: 72px;
+        position: absolute;
+        top: 108px;
+        right: 72px;
+        z-index: 4;
+      }
+      #automatic .next .ico {
+        width: 76px;
+        height: 112px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background: url(../../images/banner/hanxuedong/next.png) no-repeat;
+      }
+      #automatic .next .ico1 {
+        width: 76px;
+        height: 112px;
+        position: absolute;
+        top: 0;
+        right: 0px;
+        background: url(../../images/banner/hanxuedong/next_1.png) no-repeat;
+        z-index: 2;
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+      #automatic .next .txt {
+        width: 106px;
+        height: 112px;
+        position: absolute;
+        top: 0;
+        right: 65px;
+        background: url(../../images/banner/hanxuedong/next_txt.png) no-repeat;
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+
+      #automatic ul {
+        width: 970px;
+        height: 344px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+      }
+      #automatic li {
+        position: absolute;
+      }
+
+      #automatic .line {
+        border: 4px solid #fff;
+        width: 672px;
+        height: 336px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        margin-left: -340px;
+        z-index: 3;
+      }
+
+      #automatic .pos_0 {
+        top: -104px;
+        left: 0;
+        z-index: 1;
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+      #automatic .pos_1 {
+        top: 104px;
+        left: 0;
+        z-index: 2;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+      }
+      #automatic .pos_2 {
+        top: 43px;
+        left: 50px;
+        z-index: 3;
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+      }
+      #automatic .pos_3 {
+        top: 0;
+        left: 145px;
+        z-index: 4;
+      }
+      #automatic .pos_4 {
+        top: 43px;
+        right: 50px;
+        z-index: 3;
+        filter: alpha(opacity=80);
+        opacity: 0.8;
+      }
+      #automatic .pos_5 {
+        top: 104px;
+        right: 0;
+        z-index: 2;
+        filter: alpha(opacity=60);
+        opacity: 0.6;
+      }
+      #automatic .pos_6 {
+        top: -104px;
+        right: 0;
+        z-index: 1;
+        filter: alpha(opacity=0);
+        opacity: 0;
+      }
+
+      #footer {
+        width: 970px;
+        height: 30px;
+        text-align: center;
+        padding-top: 50px;
+        margin: 0 auto;
+      }
+      #footer a {
+        color: #930;
+        font-family: arial;
+        font-size: 15px;
+        text-decoration: none;
+        border-bottom: 1px dotted #930;
+      }
+      #footer a:hover {
+        border-bottom: 1px solid #930;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="automatic">
+      <div class="prev_div"></div>
+      <a class="prev" href="void(0);">
+        <span class="ico1"></span>
+        <span class="ico"></span>
+        <span class="txt"></span>
+      </a>
+
+      <div class="next_div"></div>
+      <a class="next" href="void(0);">
+        <span class="ico1"></span>
+        <span class="ico"></span>
+        <span class="txt"></span>
+      </a>
+
+      <ul>
+        <li class="pos_0">
+          <img src="../../images/banner/hanxuedong/8.jpg" width="100" />
+        </li>
+        <li class="pos_1">
+          <img src="../../images/banner/hanxuedong/1.jpg" width="270" />
+        </li>
+        <li class="pos_2">
+          <img src="../../images/banner/hanxuedong/2.jpg" width="510" />
+        </li>
+        <li class="pos_3">
+          <img src="../../images/banner/hanxuedong/3.jpg" width="680" />
+        </li>
+        <li class="pos_4">
+          <img src="../../images/banner/hanxuedong/4.jpg" width="510" />
+        </li>
+        <li class="pos_5">
+          <img src="../../images/banner/hanxuedong/5.jpg" width="270" />
+        </li>
+        <li class="pos_6">
+          <img src="../../images/banner/hanxuedong/6.jpg" width="270" />
+        </li>
+        <li class="pos_6">
+          <img src="../../images/banner/hanxuedong/7.jpg" width="270" />
+        </li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    var oPrevDiv = document.getElementsByClassName("prev_div")[0];
+    var oNextDiv = document.getElementsByClassName("next_div")[0];
+
+    var aLi = document.getElementsByTagName("li");
+
+    var arr = [];
+
+    for (var i = 0; i < aLi.length; i++) {
+      var oImg = aLi[i].getElementsByTagName("img")[0];
+
+      arr.push([
+        parseInt(getStyle(aLi[i], "left")),
+        parseInt(getStyle(aLi[i], "top")),
+        getStyle(aLi[i], "opacity") * 100,
+        getStyle(aLi[i], "zIndex"),
+        oImg.width,
+      ]);
+    }
+
+    oPrevDiv.onclick = function () {
+      //左
+
+      arr.push(arr[0]);
+      arr.shift();
+
+      for (var i = 0; i < aLi.length; i++) {
+        var oImg = aLi[i].getElementsByTagName("img")[0];
+
+        aLi[i].style.zIndex = arr[i][3];
+
+        startMove(aLi[i], {
+          left: arr[i][0],
+          top: arr[i][1],
+          opacity: arr[i][2],
+        });
+
+        startMove(oImg, { width: arr[i][4] });
+      }
+    };
+
+    oNextDiv.onclick = function () {
+      //右
+      arr.unshift(arr[arr.length - 1]);
+      arr.pop();
+
+      for (var i = 0; i < aLi.length; i++) {
+        var oImg = aLi[i].getElementsByTagName("img")[0];
+
+        aLi[i].style.zIndex = arr[i][3];
+
+        startMove(aLi[i], {
+          left: arr[i][0],
+          top: arr[i][1],
+          opacity: arr[i][2],
+        });
+
+        startMove(oImg, { width: arr[i][4] });
+      }
+    };
+
+    function startMove(obj, json, endFn) {
+      clearInterval(obj.timer);
+
+      obj.timer = setInterval(function () {
+        var bBtn = true;
+
+        for (var attr in json) {
+          var iCur = 0;
+
+          if (attr == "opacity") {
+            if (Math.round(parseFloat(getStyle(obj, attr)) * 100) == 0) {
+              iCur = Math.round(parseFloat(getStyle(obj, attr)) * 100);
+            } else {
+              iCur = Math.round(parseFloat(getStyle(obj, attr)) * 100) || 100;
+            }
+          } else {
+            iCur = parseInt(getStyle(obj, attr)) || 0;
+          }
+
+          var iSpeed = (json[attr] - iCur) / 8;
+          iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+          if (iCur != json[attr]) {
+            bBtn = false;
+          }
+
+          if (attr == "opacity") {
+            obj.style.filter = "alpha(opacity=" + (iCur + iSpeed) + ")";
+            obj.style.opacity = (iCur + iSpeed) / 100;
+          } else {
+            obj.style[attr] = iCur + iSpeed + "px";
+          }
+        }
+
+        if (bBtn) {
+          clearInterval(obj.timer);
+
+          if (endFn) {
+            endFn.call(obj);
+          }
+        }
+      }, 30);
+    }
+
+    function getStyle(obj, attr) {
+      if (obj.currentStyle) {
+        return obj.currentStyle[attr];
+      } else {
+        return getComputedStyle(obj, false)[attr];
+      }
+    }
+  </script>
+</html>
