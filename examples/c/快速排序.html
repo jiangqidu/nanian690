@@ -9,28 +9,23 @@
       .box {
         width: 960px;
         height: 600px;
-        padding-left: 40px;
         margin: 20px auto;
         padding-top: 20px;
-        border: 1px solid #999;
       }
       .left {
         float: left;
       }
       .right {
         float: right;
-        margin-right: 10px;
+        padding-right: 10px;
+        overflow-y: scroll;
+        height: 100%;
       }
     </style>
   </head>
   <body>
     <div class="box">
       <div class="left">
-        <span>示例</span>
-        <p id="arrayText">原数组：[805,564,45,0,12,34,56,89,456,450,5]</p>
-        <div id="description"></div>
-      </div>
-      <div class="right">
         <span>快速排序说明</span>
         <ol>
           <li>找到一个中心点</li>
@@ -39,6 +34,11 @@
           <li>和原有的拼接起来，如左边数组-中心点-右边数组</li>
           <li>递归处理</li>
         </ol>
+      </div>
+      <div class="right">
+        <span>示例</span>
+        <p id="arrayText">原数组：[805,564,45,0,12,34,56,89,456,450,5]</p>
+        <div id="description"></div>
       </div>
     </div>
     <script>
