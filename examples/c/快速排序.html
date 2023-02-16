@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .box {
+        width: 960px;
+        height: 600px;
+        padding-left: 40px;
+        margin: 20px auto;
+        padding-top: 20px;
+        border: 1px solid #999;
+      }
+      .left {
+        float: left;
+      }
+      .right {
+        float: right;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="left">
+        <span>示例</span>
+        <p id="arrayText">原数组：[805,564,45,0,12,34,56,89,456,450,5]</p>
+        <div id="description"></div>
+      </div>
+      <div class="right">
+        <span>快速排序说明</span>
+        <ol>
+          <li>找到一个中心点</li>
+          <li>创建两个空数组，存储比中心点小和大的数</li>
+          <li>遍历数组，小的放左边，大的放右边</li>
+          <li>和原有的拼接起来，如左边数组-中心点-右边数组</li>
+          <li>递归处理</li>
+        </ol>
+      </div>
+    </div>
+    <script>
+      // 提取字符串中的数组
+      const arr = JSON.parse(
+        document.getElementById("arrayText").innerText.split("：")[1]
+      );
+
+      let count = 0;
+
+      function quickSort(array) {
+        count++;
+        if (array.length <= 1) return array;
+
+        const middleIndex = array.splice(Math.floor(array.length / 2), 1);
+
+        let left = [];
+        let right = [];
+
+        array.forEach((e) => {
+          if (e > middleIndex[0]) {
+            right.push(e);
+          } else {
+            left.push(e);
+          }
+        });
+
+        const node = document.createElement("h3");
+        node.innerText = `第${count}次遍历`;
+        document.getElementById("description").appendChild(node);
+
+        const node1 = document.createElement("p");
+        node1.innerText = `中心数为${middleIndex}，遍历数组为[${array}]`;
+        document.getElementById("description").appendChild(node1);
+
+        const node2 = document.createElement("p");
+        node2.innerText = `left数组为${left}，right数组为[${right}]`;
+        document.getElementById("description").appendChild(node2);
+
+        const node3 = document.createElement("p");
+        node3.innerText = `第${count}次遍历后的数组为${left},${middleIndex[0]},${right}`;
+        document.getElementById("description").appendChild(node3);
+
+        console.log(left, middleIndex, right);
+
+        return quickSort(left).concat(middleIndex, quickSort(right));
+      }
+
+      const result = quickSort(arr);
+
+      const node4 = document.createElement("h3");
+      node4.innerText = `处理后的结果为${result}`;
+      document.getElementById("description").appendChild(node4);
+
+      // const result = quickSort(array);
+    </script>
+  </body>
+</html>
