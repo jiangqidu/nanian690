@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      img {
+        width: 256px;
+      }
+      #img {
+        display: none;
+        width: 778px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="progress"></div>
+    <div id="img">
+      <img src="../../images/img_loading/1.jpg" alt="" />
+      <img src="../../images/img_loading/2.jpg" alt="" />
+      <img src="../../images/img_loading/3.jpg" alt="" />
+      <img src="../../images/img_loading/4.jpg" alt="" />
+      <img src="../../images/img_loading/5.jpg" alt="" />
+      <img src="../../images/img_loading/6.jpg" alt="" />
+      <img src="../../images/img_loading/7.jpg" alt="" />
+      <img src="../../images/img_loading/8.jpg" alt="" />
+      <img src="../../images/img_loading/9.jpg" alt="" />
+    </div>
+    <script>
+      const array = [
+        "../../images/img_loading/1.jpg",
+        "../../images/img_loading/2.jpg",
+        "../../images/img_loading/3.jpg",
+        "../../images/img_loading/4.jpg",
+        "../../images/img_loading/5.jpg",
+        "../../images/img_loading/6.jpg",
+        "../../images/img_loading/7.jpg",
+        "../../images/img_loading/8.jpg",
+        "../../images/img_loading/9.jpg",
+      ];
+      let count = 0;
+      for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        let img = new Image();
+        img.src = element;
+        img.onload = function () {
+          count++;
+          document.querySelector("#progress").innerText =
+            count + "/" + array.length;
+          if (count === array.length) {
+            setTimeout(() => {
+              document.querySelector("#progress").style.display = "none";
+              document.querySelector("#img").style.display = "block";
+            }, 100);
+          }
+        };
+      }
+    </script>
+  </body>
+</html>
