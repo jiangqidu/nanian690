@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+    }
+    #div1 {
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      text-align: center;
+    }
+  </style>
+  <script>
+    document.onmousemove = function (ev) {
+      var oEvent = ev || event;
+      var oDiv = document.getElementById("div1");
+      var aImg = document.getElementsByTagName("img");
+      var i = 0;
+
+      for (i = 0; i < aImg.length; i++) {
+        var x = aImg[i].offsetLeft + aImg[i].offsetWidth / 2;
+        var y = aImg[i].offsetTop + oDiv.offsetTop + aImg[i].offsetHeight / 2;
+
+        var a = x - oEvent.clientX;
+        var b = y - oEvent.clientY;
+
+        var dis = Math.sqrt(a * a + b * b);
+
+        var scale = 1 - dis / 300;
+
+        if (scale < 0.5) {
+          scale = 0.5;
+        }
+
+        aImg[i].width = scale * 128;
+      }
+    };
+  </script>
+  <body>
+    <div id="div1">
+      <img src="../../images/iphone/1.png" width="64" />
+      <img src="../../images/iphone/2.png" width="64" />
+      <img src="../../images/iphone/3.png" width="64" />
+      <img src="../../images/iphone/4.png" width="64" />
+      <img src="../../images/iphone/5.png" width="64" />
+    </div>
+  </body>
+</html>
