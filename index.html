@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <title>个人博客</title>
   </head>
+  <style>
+    #footer {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    #footer img {
+      width: 21px;
+      height: 21px;
+      margin-right: 8px;
+    }
+    #footer span:hover {
+      color: #0000ee;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
   <body>
     <div id="app">
       <dl>
@@ -25,11 +45,16 @@
         <dd><a href="/examples/c/快速排序.html"></a></dd>
       </dl>
     </div>
+    <p id="footer">
+      <img src="./images/web/gov.gif" alt="" />
+      <span onclick='window.open("https://beian.miit.gov.cn/")'>
+        赣ICP备2022000239号-1</span
+      >
+    </p>
     <script>
       const nodes = document.querySelectorAll("a");
       for (let n of nodes) {
         n.innerHTML = decodeURI(n.pathname.replace(/.html|[a-z&]|\//g, ""));
-        console.log();
       }
     </script>
   </body>
