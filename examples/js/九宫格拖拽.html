@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 520px;
+        margin: 0 auto;
+      }
+      li {
+        width: 140px;
+        height: 140px;
+        list-style: none;
+        float: left;
+        background-color: #fff;
+        margin: 10px;
+        padding: 18px 20px;
+        box-sizing: border-box;
+        border-radius: 4px;
+        box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
+          0 1px 3px 0 rgba(34, 33, 81, 0.15);
+      }
+      li.active {
+        outline: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+      </ul>
+    </div>
+    <script>
+      const aLi = document.querySelectorAll("li");
+      let aPos = [];
+      let iMinZindex = 2;
+      let i = 0;
+      for (i = 0; i < aLi.length; i++) {
+        aPos[i] = { left: aLi[i].offsetLeft, top: aLi[i].offsetTop };
+      }
+      for (i = 0; i < aLi.length; i++) {
+        aLi[i].style.left = aPos[i].left + "px";
+        aLi[i].style.top = aPos[i].top + "px";
+
+        aLi[i].style.position = "absolute";
+        aLi[i].style.margin = "0";
+
+        aLi[i].index = i;
+      }
+      for (i = 0; i < aLi.length; i++) {
+        setDrag(aLi[i]);
+      }
+      function setDrag(obj) {
+        obj.onmousedown = function (ev) {
+          obj.style.zIndex = iMinZindex++;
+
+          const disX = event.clientX - obj.offsetLeft;
+          const disY = event.clientY - obj.offsetTop;
+
+          document.onmousemove = function (ev) {
+            obj.style.left = event.clientX - disX + "px";
+            obj.style.top = event.clientY - disY + "px";
+
+            for (i = 0; i < aLi.length; i++) {
+              aLi[i].className = "";
+            }
+
+            const oNear = findNearest(obj);
+
+            if (oNear) {
+              oNear.className = "active";
+            }
+          };
+
+          document.onmouseup = function () {
+            document.onmousemove = null;
+            document.onmouseup = null;
+
+            const oNear = findNearest(obj);
+
+            if (oNear) {
+              oNear.className = "";
+
+              oNear.style.zIndex = iMinZindex++;
+              obj.style.zIndex = iMinZindex++;
+
+              startMove(oNear, aPos[obj.index]);
+              startMove(obj, aPos[oNear.index]);
+
+              let tmp = 0;
+
+              tmp = obj.index;
+              obj.index = oNear.index;
+              oNear.index = tmp;
+            } else {
+              startMove(obj, aPos[obj.index]);
+            }
+          };
+
+          clearInterval(obj.timer);
+
+          return false;
+        };
+      }
+
+      //碰撞检测
+      function cdTest(obj1, obj2) {
+        var l1 = obj1.offsetLeft;
+        var r1 = obj1.offsetLeft + obj1.offsetWidth;
+        var t1 = obj1.offsetTop;
+        var b1 = obj1.offsetTop + obj1.offsetHeight;
+
+        var l2 = obj2.offsetLeft;
+        var r2 = obj2.offsetLeft + obj2.offsetWidth;
+        var t2 = obj2.offsetTop;
+        var b2 = obj2.offsetTop + obj2.offsetHeight;
+
+        if (r1 < l2 || l1 > r2 || b1 < t2 || t1 > b2) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+
+      function getDis(obj1, obj2) {
+        var a = obj1.offsetLeft - obj2.offsetLeft;
+        var b = obj1.offsetTop - obj2.offsetTop;
+
+        return Math.sqrt(a * a + b * b);
+      }
+
+      function findNearest(obj) {
+        //找到碰上的，并且最近的
+        var iMin = 999999999;
+        var iMinIndex = -1;
+
+        for (i = 0; i < aLi.length; i++) {
+          if (obj == aLi[i]) continue;
+
+          if (cdTest(obj, aLi[i])) {
+            var dis = getDis(obj, aLi[i]);
+
+            if (iMin > dis) {
+              iMin = dis;
+              iMinIndex = i;
+            }
+          }
+        }
+
+        if (iMinIndex == -1) {
+          return null;
+        } else {
+          return aLi[iMinIndex];
+        }
+      }
+      function startMove(obj, json) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+          let bStop = true;
+          for (const attr in json) {
+            let iCur = 0;
+            iCur = parseInt(getComputedStyle(obj, false)[attr]);
+            let iSpeed = (json[attr] - iCur) / 8;
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+            if (iCur != json[attr]) {
+              bStop = false;
+            }
+            obj.style[attr] = iCur + iSpeed + "px";
+          }
+          if (bStop) {
+            clearInterval(obj.timer);
+          }
+        }, 13);
+      }
+    </script>
+  </body>
+</html>

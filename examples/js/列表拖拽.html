@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 350px;
+        margin: 0 auto;
+        position: relative;
+      }
+      li {
+        width: 100%;
+        list-style: none;
+        height: 60px;
+        padding: 18px 20px;
+        margin-bottom: 10px;
+        border-radius: 6px;
+        box-sizing: border-box;
+        background-color: #fff;
+        box-shadow: 0 0 0 1px rgba(63, 63, 68, 0.05),
+          0 1px 3px 0 rgba(34, 33, 81, 0.15);
+      }
+      li.active {
+        border: 1px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </ul>
+    </div>
+    <script>
+      let zIndex = 1;
+      let posArray = [];
+      const aLi = document.querySelectorAll("li");
+
+      for (let i = 0; i < aLi.length; i++) {
+        const item = aLi[i];
+        posArray.push([item.offsetTop, item.offsetLeft]);
+        item.onmousedown = function () {
+          zIndex++;
+          this.className = "active";
+          this.style.zIndex = zIndex;
+          const disX = event.x - item.offsetLeft;
+          const disY = event.y - item.offsetTop;
+          document.onmousemove = function () {
+            const { x, y } = event;
+            item.style.left = x - disX + "px";
+            item.style.top = y - disY + "px";
+
+            const t1 = item.offsetTop;
+            const b1 = item.offsetTop + item.offsetHeight;
+
+            for (let i_ = 0; i_ < aLi.length; i_++) {
+              const item_ = aLi[i_];
+              const t2 = item_.offsetTop + item_.offsetHeight / 2;
+              const b2 = item_.offsetTop + item_.offsetHeight;
+              if (b1 > t2 && t1 < b2) {
+                if (item === item_ || item_.isMove) continue;
+                item_.isMove = true;
+                animate(
+                  item_,
+                  {
+                    top: posArray[i][0],
+                    left: posArray[i][1],
+                  },
+                  () => {
+                    item_.isMove = false;
+                  }
+                );
+                [posArray[i], posArray[i_]] = [posArray[i_], posArray[i]];
+              }
+            }
+          };
+          document.onmouseup = function () {
+            item.className = "";
+            animate(item, {
+              top: posArray[i][0],
+              left: posArray[i][1],
+            });
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      }
+
+      for (let i = 0; i < aLi.length; i++) {
+        const item = aLi[i];
+        item.isMove = false;
+        item.style.position = "absolute";
+        item.style.top = posArray[i][0] + "px";
+        item.style.left = posArray[i][1] + "px";
+      }
+
+      for (let i = 0; i < aLi.length; i++) {
+        const item = aLi[i];
+        posArray.push([item.offsetTop, item.offsetLeft]);
+      }
+
+      function animate(obj, json, fn) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+          let bStop = true;
+          for (const attr in json) {
+            let iCur = 0;
+            iCur = parseInt(getComputedStyle(obj, false)[attr]);
+            let iSpeed = (json[attr] - iCur) / 8;
+            iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+            if (iCur != json[attr]) {
+              bStop = false;
+            }
+            obj.style[attr] = iCur + iSpeed + "px";
+          }
+          if (bStop) {
+            clearInterval(obj.timer);
+            if (fn) fn();
+          }
+        }, 13);
+      }
+    </script>
+  </body>
+</html>

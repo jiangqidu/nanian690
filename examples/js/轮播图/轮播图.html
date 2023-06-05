@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="./jquery.js"></script>
+    <style>
+      h2 {
+        text-align: center;
+      }
+      ul {
+        padding-left: 0;
+      }
+      li {
+        float: left;
+        list-style: none;
+      }
+      .title a {
+        margin-right: 10px;
+      }
+      .a {
+        width: 960px;
+        margin: 80px auto;
+      }
+      .a img {
+        width: 256px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>常见轮播图效果展示</h2>
+    <div class="title">
+      <ul>
+        <li><a href="#">无缝轮播</a></li>
+        <li><a href="#">淡入淡出</a></li>
+      </ul>
+    </div>
+    <div class="a">
+      <ul>
+        <li><img src="../../images/img_loading/1.jpg" alt="" /></li>
+        <li><img src="../../images/img_loading/2.jpg" alt="" /></li>
+        <li><img src="../../images/img_loading/3.jpg" alt="" /></li>
+        <li><img src="../../images/img_loading/4.jpg" alt="" /></li>
+      </ul>
+    </div>
+  </body>
+  <script>
+    // 文档初始化
+    $(() => {
+      // $(".a ul").css("width",'calc')
+      console.log($(".a ul li").css("width"));
+      '$(".a ul li")', $(".a ul li").length();
+      // $(".a>ul").css("width",$(".a ul li").css('width'))
+    });
+  </script>
+</html>
